@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <h1>🎬 Movie Recommendations</h1>
+        <nav>
+            <a href="/">🏠 Home</a>
+            <a href="/watchlist">📜 Watchlist</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h2>🔍 Recommended Movies</h2>
+        {% if movies %}
+        <div class="movies-grid">
+            {% for movie in movies %}
+            <div class="movie-card">
+                <img src="{{ movie.poster }}" alt="{{ movie.title }} poster" loading="lazy">
+                <h2>{{ movie.title }}</h2>
+                {% if movie.trailer %}
+                <a href="{{ movie.trailer }}" target="_blank" class="trailer-btn">▶ Watch Trailer</a>
+                {% endif %}
+                <p>⭐ Rating: {{ movie.rating }} / 10</p>
+                <p>🔥 Popularity: {{ movie.popularity }}</p>
+                <p>📅 Release Year: {{ movie.release_year }}</p>
+                <p>🌍 Language: {{ movie.language }}</p>
+                <p>🎭 Top Cast: {{ movie.cast }}</p>
+                <button 
+                    class="add-watchlist" 
+                    data-title="{{ movie.title }}" 
+                    data-poster="{{ movie.poster }}" 
+                    data-rating="{{ movie.rating }}" 
+                    data-genre="{{ movie.genre }}" 
+                    data-popularity="{{ movie.popularity }}" 
+                    data-release_year="{{ movie.release_year }}"
+                    data-language="{{ movie.language }}" 
+                    data-cast="{{ movie.cast }}"
+                    aria-label="Add {{ movie.title }} to watchlist"
+                >
+                    ➕ Add to Watchlist
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty-msg">🚫 No recommendations found. Try searching for a different genre or description!</p>
+        {% endif %}
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Movie Recommendation System</p>
+    </footer>
+</body>
+</html>

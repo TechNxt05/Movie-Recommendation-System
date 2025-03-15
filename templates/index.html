@@ -1,0 +1,108 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🎬 Movie Recommendation System</h1>
+        <nav>
+            <a href="/">🏠 Home</a>
+            <a href="/watchlist">📜 Watchlist</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h2>Find Your Next Favorite Movie 🍿</h2>
+        <form action="/" method="post" class="search-form">
+            <input type="text" name="query" placeholder="Enter genre, mood, or description..." required>
+            <label>Genre:</label>
+            <select name="genre">
+                <option value="">All</option>
+                {% for genre in genres %}
+                <option value="{{ genre }}">{{ genre }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">🔍 Get Recommendations</button>
+        </form>
+        <a href="/watchlist" class="watchlist-btn">📜 View Watchlist</a>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Movie Recommendation System</p>
+    </footer>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            background-color: #1e1e1e;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #f4b400;
+            text-decoration: none;
+        }
+        .container {
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: #242424;
+            border-radius: 8px;
+        }
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+        input, select, button {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background-color: #f4b400;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .watchlist-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #f4b400;
+            color: black;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            background-color: #1e1e1e;
+        }
+    </style>
+</body>
+</html>

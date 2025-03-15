@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Watchlist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>📜 Your Watchlist</h1>
+
+        {% if movies %}
+        <div class="movies-grid">
+            {% for movie in movies %}
+            <div class="movie-card">
+                <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+                <h2>{{ movie.title }}</h2>
+                <p>⭐ Rating: {{ movie.rating }} / 10</p>
+                <p>🎭 Genre: {{ movie.genre }}</p>
+                <button class="remove-watchlist" data-id="{{ movie.id }}">❌ Remove</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty-msg">No movies in your watchlist yet. Start adding your favorites!</p>
+        {% endif %}
+
+        <a href="/" class="back-btn">🔙 Back to Home</a>
+    </div>
+</body>
+</html>
